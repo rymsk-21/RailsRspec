@@ -1,52 +1,28 @@
-<%= form_with(model: gym_enquete) do |form| %>
+<%= form_with(model: gym_enquete, local: true) do |form| %>
   <% if gym_enquete.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(gym_enquete.errors.count, "error") %> prohibited this gym_enquete from being saved:</h2>
-
+    <div id="error_explanation">
       <ul>
-        <% gym_enquete.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% gym_enquete.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
+  <%= render 'concerns/form_name_mail_age', form: form %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="field">
+    <%= form.label :course_id %>
+    <%= form.select :course_id, gym_enquete.course_choices %><%# 脂肪燃焼、ヨガ %>
   </div>
 
-  <div>
-    <%= form.label :mail, style: "display: block" %>
-    <%= form.text_field :mail %>
+  <%= render 'concerns/form_score_request', form: form %>
+
+  <div class="field">
+    <%= form.label :present_id %>
+    <%= form.select :present_id, gym_enquete.present_choices %><%# サプリメントセット、温泉旅行 %>
   </div>
 
-  <div>
-    <%= form.label :age, style: "display: block" %>
-    <%= form.number_field :age %>
-  </div>
-
-  <div>
-    <%= form.label :course_id, style: "display: block" %>
-    <%= form.number_field :course_id %>
-  </div>
-
-  <div>
-    <%= form.label :score, style: "display: block" %>
-    <%= form.number_field :score %>
-  </div>
-
-  <div>
-    <%= form.label :request, style: "display: block" %>
-    <%= form.text_field :request %>
-  </div>
-
-  <div>
-    <%= form.label :present_id, style: "display: block" %>
-    <%= form.number_field :present_id %>
-  </div>
-
-  <div>
+  <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
