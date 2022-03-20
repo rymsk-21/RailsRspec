@@ -8,15 +8,16 @@ RSpec.describe FoodEnquete, type: :model do
                             希望するプレゼント:ビール飲み放題 present_id: 1)' do
 
         # テストデータ作成
-        enquete = FoodEnquete.new(
-          name: '田中 太郎',
-          mail: 'taro.tanaka@example.com',
-          age: 25,
-          food_id: 2,
-          score: 3,
-          request: 'おいしかったです。',
-          present_id: 1
-        )
+        # enquete = FoodEnquete.new(
+        #   name: '田中 太郎',
+        #   mail: 'taro.tanaka@example.com',
+        #   age: 25,
+        #   food_id: 2,
+        #   score: 3,
+        #   request: 'おいしかったです。',
+        #   present_id: 1
+        # )
+        enquete = FactoryBot.build(:food_enquete)
 
         # バリデーションが正常に通ること
         expect(enquete).to be_valid
@@ -84,29 +85,33 @@ RSpec.describe FoodEnquete, type: :model do
                 context 'メールアドレスを確認すること' do
                   it '同じメールアドレスで再び回答できないこと'do
                     # 一つ目のテストデータを作成します。
-                    enquete_tanaka = FoodEnquete.new(
-                      name: '田中 太郎',
-                      mail: 'taro.tanaka@example.com',
-                      age: 25,
-                      food_id: 2,
-                      score: 3,
-                      request: 'おいしかったです。',
-                      present_id: 1
-                    )
-                    enquete_tanaka.save
+                    # enquete_tanaka = FoodEnquete.new(
+                    #   name: '田中 太郎',
+                    #   mail: 'taro.tanaka@example.com',
+                    #   age: 25,
+                    #   food_id: 2,
+                    #   score: 3,
+                    #   request: 'おいしかったです。',
+                    #   present_id: 1
+                    # )
+                    # enquete_tanaka.save
+
+                    FactoryBot.create(:food_enquete)
 
                     # 二つ目のテストデータを作成します。
-                    re_enquete_tanaka = FoodEnquete.new(
-                      name: '田中 太郎',
-                      mail: 'taro.tanaka@example.com',
-                      age: 25,
-                      food_id: 0,
-                      score: 1,
-                      request: 'スープがぬるかった',
-                      present_id: 0
-                    )
-                    expect(re_enquete_tanaka).not_to be_valid
+                    # re_enquete_tanaka = FoodEnquete.new(
+                    #   name: '田中 太郎',
+                    #   mail: 'taro.tanaka@example.com',
+                    #   age: 25,
+                    #   food_id: 0,
+                    #   score: 1,
+                    #   request: 'スープがぬるかった',
+                    #   present_id: 0
+                    # )
+                    #
+                    re_enquete_tanaka = FactoryBot.build(:food_enquete, food_id: 0, score: 1, present_id: 0, request: "スープがぬるかった")
 
+                    expect(re_enquete_tanaka).not_to be_valid
                     # メールアドレスがすでに存在するメッセージが含まれることを検証します。
                     expect(re_enquete_tanaka.errors[:mail]).to include(I18n.t('errors.messages.taken'))
                     expect(re_enquete_tanaka.save).to be_falsey
@@ -114,17 +119,18 @@ RSpec.describe FoodEnquete, type: :model do
                   end
 
                   it '異なるメールアドレスで回答ができること' do
-                    enquete_tanaka = FoodEnquete.new(
-                      name: '田中 太郎',
-                      mail: 'taro.tanaka@example.com',
-                      age: 25,
-                      food_id: 2,
-                      score: 3,
-                      request: 'おいしかったです。',
-                      present_id: 1
-                    )
+                    # enquete_tanaka = FoodEnquete.new(
+                    #   name: '田中 太郎',
+                    #   mail: 'taro.tanaka@example.com',
+                    #   age: 25,
+                    #   food_id: 2,
+                    #   score: 3,
+                    #   request: 'おいしかったです。',
+                    #   present_id: 1
+                    # )
+                    # enquete_tanaka.save
 
-                    enquete_tanaka.save
+                    FactoryBot.create(:food_enquete)
 
                     enquete_yamada = FoodEnquete.new(
                       name: '山田 二郎',
