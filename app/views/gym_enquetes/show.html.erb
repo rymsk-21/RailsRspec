@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @gym_enquete %>
+
+<div>
+  <%= link_to "Edit this gym enquete", edit_gym_enquete_path(@gym_enquete) %> |
+  <%= link_to "Back to gym enquetes", gym_enquetes_path %>
+
+  <%= button_to "Destroy this gym enquete", @gym_enquete, method: :delete %>
+</div>

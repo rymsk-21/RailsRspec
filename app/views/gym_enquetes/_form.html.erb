@@ -1,0 +1,52 @@
+<%= form_with(model: gym_enquete) do |form| %>
+  <% if gym_enquete.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(gym_enquete.errors.count, "error") %> prohibited this gym_enquete from being saved:</h2>
+
+      <ul>
+        <% gym_enquete.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :mail, style: "display: block" %>
+    <%= form.text_field :mail %>
+  </div>
+
+  <div>
+    <%= form.label :age, style: "display: block" %>
+    <%= form.number_field :age %>
+  </div>
+
+  <div>
+    <%= form.label :course_id, style: "display: block" %>
+    <%= form.number_field :course_id %>
+  </div>
+
+  <div>
+    <%= form.label :score, style: "display: block" %>
+    <%= form.number_field :score %>
+  </div>
+
+  <div>
+    <%= form.label :request, style: "display: block" %>
+    <%= form.text_field :request %>
+  </div>
+
+  <div>
+    <%= form.label :present_id, style: "display: block" %>
+    <%= form.number_field :present_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
