@@ -35,6 +35,9 @@ RSpec.describe FoodEnquete, type: :model do
                     FactoryBot.create(:food_enquete_tanaka)
                   end
 
+                  before do
+                    FactoryBot.create(:food_enquete_tanaka)
+                  end
                   it '同じメールアドレスで再び回答できないこと'do
 
                     re_enquete_tanaka = FactoryBot.build(:food_enquete_tanaka, food_id: 0, score: 1, present_id: 0, request: "スープがぬるかった")
